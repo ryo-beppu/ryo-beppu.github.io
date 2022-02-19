@@ -35,23 +35,14 @@
           "error", 
           { 
             "extensions": [
-              ".jsx",
               ".tsx"
             ]
           }
         ],
-        "import/no-default-export": "error",
-        "import/extensions": [
-          "error",
-          "ignorePackages",
-          {
-            "js": "never",
-            "jsx": "never",
-            "ts": "never",
-            "tsx": "never"
-          }
-        ],
+        "import/extensions":"off",
         "default-param-last": "off",
-        "react/function-component-definition": "off"
+        "react/function-component-definition": "off",
+        "import/no-extraneous-dependencies": "off",
+        "react/prop-types":"off"
     }
 }
