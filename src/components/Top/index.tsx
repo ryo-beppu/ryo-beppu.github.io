@@ -42,7 +42,7 @@ export const Top: React.FC = () => (
   <TopContentWrapper>
     <ButtonWrapper>
       {items.map((item, index) => (
-        <Button key={index.toString()} text={item.label} fonSize={item.fontSize} />
+        <Button key={index.toString()} text={item.label} fonSize={item.fontSize} order={index} />
       ))}
     </ButtonWrapper>
   </TopContentWrapper>

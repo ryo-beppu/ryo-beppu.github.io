@@ -1,7 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-const ButtonWrapper = styled.button`
+const fadeIn = keyframes`
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+`;
+
+const move = keyframes`
+  0%{
+    transform: translateX(10px);
+  }
+  100%{
+    transform: translateX(0px);
+  }
+`;
+
+const ButtonWrapper = styled.button<{ order: number }>`
   align-items: center;
   justify-content: center;
   display: flex;
@@ -14,6 +32,8 @@ const ButtonWrapper = styled.button`
   cursor: pointer;
   outline: none;
   appearance: none;
+  opacity: 0;
+  animation: ${fadeIn} 1s linear ${(props) => (`${props.order}`)}s forwards, ${move} 1s linear ${(props) => (`${props.order}`)}s forwards;
 `;
 
 const StyledText = styled.p<{ fontSize: number }>`
@@ -35,10 +55,11 @@ const StyledSvg = styled.svg`
 interface Props {
   text: string;
   fonSize:number;
+  order: number;
 }
 
-export const Button: React.FC<Props> = ({ text, fonSize }) => (
-  <ButtonWrapper onClick={() => console.log('aaa')}>
+export const Button: React.FC<Props> = ({ text, fonSize, order }) => (
+  <ButtonWrapper order={(order + 1) * 0.5} onClick={() => console.log('aaa')}>
     <StyledText fontSize={fonSize}>
       {text}
     </StyledText>
