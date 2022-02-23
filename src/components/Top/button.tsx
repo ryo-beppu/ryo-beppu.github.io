@@ -70,13 +70,14 @@ export const Button: React.FC<Props> = ({
 }) => {
   const onClick = () => {
     if (isEnabled) {
-      window.location.href = `https://ryo-beppu.github.io/ + ${url}`;
+      window.location.href = `https://ryo-beppu.github.io/${url}`;
     }
   };
 
   return (
     <ButtonWrapper
       order={(order + 1) * 0.5}
+      type="button"
       onClick={onClick}
     >
       <StyledText fontSize={fonSize}>
