@@ -8,19 +8,21 @@ type CurrentTab =
   | 'commingSoon';
 
 const items: {
+  isEnabled: boolean;
   label: string;
   tabId: CurrentTab;
   chapter: string;
   fontSize: number;
+  url: string;
 }[] = [
   {
-    label: 'Portforio', tabId: 'portforio', chapter: '', fontSize: 48,
+    isEnabled: true, label: 'Portforio', tabId: 'portforio', chapter: '', fontSize: 48, url: 'ryo226.portfolio/',
   },
   {
-    label: 'css de gameUI', tabId: 'gameUI', chapter: '', fontSize: 46,
+    isEnabled: false, label: 'css de gameUI', tabId: 'gameUI', chapter: '', fontSize: 46, url: '',
   },
   {
-    label: 'Comming Soon...', tabId: 'commingSoon', chapter: '', fontSize: 40,
+    isEnabled: false, label: 'Comming Soon...', tabId: 'commingSoon', chapter: '', fontSize: 40, url: '',
   },
 ];
 
@@ -42,7 +44,14 @@ export const Top: React.FC = () => (
   <TopContentWrapper>
     <ButtonWrapper>
       {items.map((item, index) => (
-        <Button key={index.toString()} text={item.label} fonSize={item.fontSize} order={index} />
+        <Button
+          key={index.toString()}
+          isEnabled={item.isEnabled}
+          text={item.label}
+          fonSize={item.fontSize}
+          order={index}
+          url={item.url}
+        />
       ))}
     </ButtonWrapper>
   </TopContentWrapper>

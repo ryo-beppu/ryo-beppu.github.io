@@ -34,39 +34,57 @@ const ButtonWrapper = styled.button<{ order: number }>`
   appearance: none;
   opacity: 0;
   animation: ${fadeIn} 1s linear ${(props) => (`${props.order}`)}s forwards, ${move} 1s linear ${(props) => (`${props.order}`)}s forwards;
+  z-index:3;
 `;
 
 const StyledText = styled.p<{ fontSize: number }>`
   color:#C4C4C4;
+  z-index:2;
   font-size: ${(props) => (`${props.fontSize}px`)};
 `;
 
-const StyledSvg = styled.svg`
+const StyledSvg = styled.svg<{isEnabled: boolean}>`
   position: absolute;
   width:311px;
   height:327px;
-  fill-opacity:0;
-  &:hover{
-    fill-opacity:0.4;
-    fill: #3E3D3D;
+  z-index:1;
+  fill-opacity: ${(props) => (props.isEnabled ? 0 : 0.5)};
+  fill: #000000;
+
+  ${ButtonWrapper}:hover & {
+    fill-opacity: 1;
+    fill:  #3E3D3D;
   }
 `;
 
 interface Props {
+  isEnabled: boolean;
   text: string;
   fonSize:number;
   order: number;
+  url: string;
 }
 
-export const Button: React.FC<Props> = ({ text, fonSize, order }) => (
-  <ButtonWrapper order={(order + 1) * 0.5} onClick={() => console.log('aaa')}>
-    <StyledText fontSize={fonSize}>
-      {text}
-    </StyledText>
-    <StyledSvg viewBox="0 0 311 327" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0.5" y="0.5" width="310" height="326" rx="19.5" stroke="#C4C4C4" />
-    </StyledSvg>
+export const Button: React.FC<Props> = ({
+  isEnabled, text, fonSize, order, url,
+}) => {
+  const onClick = () => {
+    if (isEnabled) {
+      window.location.href = `https://ryo-beppu.github.io/ + ${url}`;
+    }
+  };
 
-  </ButtonWrapper>
-
-);
+  return (
+    <ButtonWrapper
+      order={(order + 1) * 0.5}
+      onClick={onClick}
+    >
+      <StyledText fontSize={fonSize}>
+        {text}
+      </StyledText>
+      <StyledSvg viewBox="0 0 311 327" xmlns="http://www.w3.org/2000/svg" isEnabled={isEnabled}>
+        <rect x="0.5" y="0.5" width="310" height="326" rx="19.5" stroke="#C4C4C4" />
+      </StyledSvg>
+    </ButtonWrapper>
+  );
+};
