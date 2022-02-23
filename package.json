@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:ryo-beppu/ryo-beppu.github.io.git",
-  "homepage": "http://ryo-beppu.github.io",
+  "homepage": "https://ryo-beppu.github.io",
   "license": "MIT",
   "dependencies": {
     "react": "^17.0.2",
