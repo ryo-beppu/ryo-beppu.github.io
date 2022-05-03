@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
   0%{
@@ -33,34 +33,34 @@ const ButtonWrapper = styled.button<{ order: number }>`
   outline: none;
   appearance: none;
   opacity: 0;
-  animation: ${fadeIn} 1s linear ${(props) => (`${props.order}`)}s forwards, ${move} 1s linear ${(props) => (`${props.order}`)}s forwards;
+  animation: ${fadeIn} 1s linear ${({ order }) => (`${order}`)}s forwards, ${move} 1s linear ${({ order }) => (`${order}`)}s forwards;
   z-index:3;
 `;
 
 const StyledText = styled.p<{ fontSize: number }>`
   color:#C4C4C4;
   z-index:2;
-  font-size: ${(props) => (`${props.fontSize}px`)};
+  font-size: ${({ fontSize }) => (`${fontSize}px`)};
 `;
 
-const StyledSvg = styled.svg<{isEnabled: boolean}>`
+const StyledSvg = styled.svg<{ isEnabled: boolean }>`
   position: absolute;
   width:311px;
   height:327px;
   z-index:1;
-  fill-opacity: ${(props) => (props.isEnabled ? 0 : 0.5)};
-  fill: #000000;
+  fill: ${({ isEnabled }) => (isEnabled ? '#222222' : '#111111')};
 
-  ${ButtonWrapper}:hover & {
-    fill-opacity: 1;
-    fill:  #3E3D3D;
-  }
+  ${({ isEnabled }) => isEnabled && css`
+    &:hover {
+      fill: #3E3D3D;
+    }
+  `};
 `;
 
 interface Props {
   isEnabled: boolean;
   text: string;
-  fonSize:number;
+  fonSize: number;
   order: number;
   url: string;
 }
@@ -83,7 +83,11 @@ export const Button: React.FC<Props> = ({
       <StyledText fontSize={fonSize}>
         {text}
       </StyledText>
-      <StyledSvg viewBox="0 0 311 327" xmlns="http://www.w3.org/2000/svg" isEnabled={isEnabled}>
+      <StyledSvg
+        viewBox="0 0 311 327"
+        xmlns="http://www.w3.org/2000/svg"
+        isEnabled={isEnabled}
+      >
         <rect x="0.5" y="0.5" width="310" height="326" rx="19.5" stroke="#C4C4C4" />
       </StyledSvg>
     </ButtonWrapper>

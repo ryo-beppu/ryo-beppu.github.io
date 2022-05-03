@@ -19,9 +19,6 @@ const items: {
     isEnabled: true, label: 'Portforio', tabId: 'portforio', chapter: '', fontSize: 48, url: 'ryo226.portfolio/',
   },
   {
-    isEnabled: false, label: 'css de gameUI', tabId: 'gameUI', chapter: '', fontSize: 46, url: '',
-  },
-  {
     isEnabled: false, label: 'Comming Soon...', tabId: 'commingSoon', chapter: '', fontSize: 40, url: '',
   },
 ];
