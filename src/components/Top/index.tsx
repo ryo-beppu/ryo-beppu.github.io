@@ -28,10 +28,6 @@ const TopContentWrapper = styled.div`
   height: 100vh;
   margin: 0px;
   background-color: #222222;
-`;
-
-const ButtonWrapper = styled.div`
-  height: 100vh;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -39,17 +35,15 @@ const ButtonWrapper = styled.div`
 
 export const Top: React.FC = () => (
   <TopContentWrapper>
-    <ButtonWrapper>
-      {items.map((item, index) => (
-        <Button
-          key={index.toString()}
-          isEnabled={item.isEnabled}
-          text={item.label}
-          fonSize={item.fontSize}
-          order={index}
-          url={item.url}
-        />
-      ))}
-    </ButtonWrapper>
+    {items.map((item, index) => (
+      <Button
+        key={item.label}
+        isEnabled={item.isEnabled}
+        text={item.label}
+        fonSize={item.fontSize}
+        order={index}
+        url={item.url}
+      />
+    ))}
   </TopContentWrapper>
 );

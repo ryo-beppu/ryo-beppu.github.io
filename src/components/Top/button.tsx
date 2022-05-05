@@ -43,18 +43,25 @@ const StyledText = styled.p<{ fontSize: number }>`
   font-size: ${({ fontSize }) => (`${fontSize}px`)};
 `;
 
-const StyledSvg = styled.svg<{ isEnabled: boolean }>`
+// TODO: ${ButtonWrapper}:hoverが親要素のclassを拾ってしまうので切り替えができない
+const EnabledSvg = styled.svg`
   position: absolute;
   width:311px;
   height:327px;
   z-index:1;
-  fill: ${({ isEnabled }) => (isEnabled ? '#222222' : '#111111')};
+  fill: #222222;
 
-  ${({ isEnabled }) => isEnabled && css`
-    &:hover {
+  ${ButtonWrapper}:hover &{
       fill: #3E3D3D;
     }
-  `};
+`;
+
+const DisabledSvg = styled.svg`
+  position: absolute;
+  width:311px;
+  height:327px;
+  z-index:1;
+  fill: #111111;
 `;
 
 interface Props {
@@ -83,13 +90,21 @@ export const Button: React.FC<Props> = ({
       <StyledText fontSize={fonSize}>
         {text}
       </StyledText>
-      <StyledSvg
-        viewBox="0 0 311 327"
-        xmlns="http://www.w3.org/2000/svg"
-        isEnabled={isEnabled}
-      >
-        <rect x="0.5" y="0.5" width="310" height="326" rx="19.5" stroke="#C4C4C4" />
-      </StyledSvg>
+      {isEnabled ? (
+        <EnabledSvg
+          viewBox="0 0 311 327"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.5" y="0.5" width="310" height="326" rx="19.5" stroke="#C4C4C4" />
+        </EnabledSvg>
+      ) : (
+        <DisabledSvg
+          viewBox="0 0 311 327"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.5" y="0.5" width="310" height="326" rx="19.5" stroke="#C4C4C4" />
+        </DisabledSvg>
+      )}
     </ButtonWrapper>
   );
 };
