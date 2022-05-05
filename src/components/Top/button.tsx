@@ -19,6 +19,12 @@ const move = keyframes`
   }
 `;
 
+const draw = keyframes`
+  100% {
+    stroke-dashoffset: 0;
+  }
+`;
+
 const ButtonWrapper = styled.button<{ order: number }>`
   align-items: center;
   justify-content: center;
@@ -44,12 +50,15 @@ const StyledText = styled.p<{ fontSize: number }>`
 `;
 
 // TODO: ${ButtonWrapper}:hoverが親要素のclassを拾ってしまうので切り替えができない
-const EnabledSvg = styled.svg`
+const EnabledSvg = styled.svg<{ order: number }>`
   position: absolute;
   width:311px;
   height:327px;
   z-index:1;
   fill: #222222;
+  stroke-dasharray: 1240 1242;
+  stroke-dashoffset: 1241;
+  animation: ${draw} 1s ease-in-out ${({ order }) => (`${order}`)}s forwards;
 
   ${ButtonWrapper}:hover &{
       fill: #3E3D3D;
@@ -62,6 +71,9 @@ const DisabledSvg = styled.svg`
   height:327px;
   z-index:1;
   fill: #111111;
+  stroke-dasharray: 1240 1242;
+  stroke-dashoffset: 1241;
+  animation: ${draw} 1s ease-in-out ${({ order }) => (`${order}`)}s forwards;
 `;
 
 interface Props {
@@ -94,15 +106,27 @@ export const Button: React.FC<Props> = ({
         <EnabledSvg
           viewBox="0 0 311 327"
           xmlns="http://www.w3.org/2000/svg"
+          order={(order + 1) * 0.4}
         >
-          <rect x="0.5" y="0.5" width="310" height="326" rx="19.5" stroke="#C4C4C4" />
+          <path
+            width="310"
+            height="326"
+            stroke="#C4C4C4"
+            d="M 19.5,0.5 L 291.5,0.5 A 19,19,0,0,1,310.5,19.5 L 310.5,307.5 A 19,19,0,0,1,291.5,326.5 L 19.5,326.5 A 19,19,0,0,1,0.5,307.5 L 0.5,19.5 A 19,19,0,0,1,19.5,0.5"
+          />
         </EnabledSvg>
       ) : (
         <DisabledSvg
           viewBox="0 0 311 327"
           xmlns="http://www.w3.org/2000/svg"
+          order={(order + 1) * 0.4}
         >
-          <rect x="0.5" y="0.5" width="310" height="326" rx="19.5" stroke="#C4C4C4" />
+          <path
+            width="310"
+            height="326"
+            stroke="#C4C4C4"
+            d="M 19.5,0.5 L 291.5,0.5 A 19,19,0,0,1,310.5,19.5 L 310.5,307.5 A 19,19,0,0,1,291.5,326.5 L 19.5,326.5 A 19,19,0,0,1,0.5,307.5 L 0.5,19.5 A 19,19,0,0,1,19.5,0.5"
+          />
         </DisabledSvg>
       )}
     </ButtonWrapper>
