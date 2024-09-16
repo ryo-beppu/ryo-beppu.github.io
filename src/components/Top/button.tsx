@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
   0%{
@@ -39,41 +39,42 @@ const ButtonWrapper = styled.button<{ order: number }>`
   outline: none;
   appearance: none;
   opacity: 0;
-  animation: ${fadeIn} 1s linear ${({ order }) => (`${order}`)}s forwards, ${move} 1s linear ${({ order }) => (`${order}`)}s forwards;
-  z-index:3;
+  animation: ${fadeIn} 1s linear ${({ order }) => `${order}`}s forwards,
+    ${move} 1s linear ${({ order }) => `${order}`}s forwards;
+  z-index: 3;
 `;
 
 const StyledText = styled.p<{ fontSize: number }>`
-  color:#C4C4C4;
-  z-index:2;
-  font-size: ${({ fontSize }) => (`${fontSize}px`)};
+  color: #c4c4c4;
+  z-index: 2;
+  font-size: ${({ fontSize }) => `${fontSize}px`};
 `;
 
 // TODO: ${ButtonWrapper}:hoverが親要素のclassを拾ってしまうので切り替えができない
 const EnabledSvg = styled.svg<{ order: number }>`
   position: absolute;
-  width:311px;
-  height:327px;
-  z-index:1;
+  width: 311px;
+  height: 327px;
+  z-index: 1;
   fill: #222222;
   stroke-dasharray: 1240 1242;
   stroke-dashoffset: 1241;
-  animation: ${draw} 1s ease-in-out ${({ order }) => (`${order}`)}s forwards;
+  animation: ${draw} 1s ease-in-out ${({ order }) => `${order}`}s forwards;
 
-  ${ButtonWrapper}:hover &{
-      fill: #3E3D3D;
-    }
+  ${ButtonWrapper}:hover & {
+    fill: #3e3d3d;
+  }
 `;
 
 const DisabledSvg = styled.svg`
   position: absolute;
-  width:311px;
-  height:327px;
-  z-index:1;
+  width: 311px;
+  height: 327px;
+  z-index: 1;
   fill: #111111;
   stroke-dasharray: 1240 1242;
   stroke-dashoffset: 1241;
-  animation: ${draw} 1s ease-in-out ${({ order }) => (`${order}`)}s forwards;
+  animation: ${draw} 1s ease-in-out ${({ order }) => `${order}`}s forwards;
 `;
 
 interface Props {
@@ -85,7 +86,11 @@ interface Props {
 }
 
 export const Button: React.FC<Props> = ({
-  isEnabled, text, fonSize, order, url,
+  isEnabled,
+  text,
+  fonSize,
+  order,
+  url,
 }) => {
   const onClick = () => {
     if (isEnabled) {
@@ -94,14 +99,8 @@ export const Button: React.FC<Props> = ({
   };
 
   return (
-    <ButtonWrapper
-      order={(order + 1) * 0.5}
-      type="button"
-      onClick={onClick}
-    >
-      <StyledText fontSize={fonSize}>
-        {text}
-      </StyledText>
+    <ButtonWrapper order={(order + 1) * 0.5} type="button" onClick={onClick}>
+      <StyledText fontSize={fonSize}>{text}</StyledText>
       {isEnabled ? (
         <EnabledSvg
           viewBox="0 0 311 327"

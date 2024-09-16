@@ -2,10 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from './button';
 
-type CurrentTab =
-  | 'portforio'
-  | 'gameUI'
-  | 'commingSoon';
+type CurrentTab = 'portforio' | 'gameUI' | 'commingSoon';
 
 const items: {
   isEnabled: boolean;
@@ -16,10 +13,20 @@ const items: {
   url: string;
 }[] = [
   {
-    isEnabled: true, label: 'Portforio', tabId: 'portforio', chapter: '', fontSize: 48, url: 'ryo226.portfolio/',
+    isEnabled: true,
+    label: 'Portforio',
+    tabId: 'portforio',
+    chapter: '',
+    fontSize: 48,
+    url: 'ryo226.portfolio/',
   },
   {
-    isEnabled: false, label: 'Comming Soon...', tabId: 'commingSoon', chapter: '', fontSize: 40, url: '',
+    isEnabled: false,
+    label: 'Comming Soon...',
+    tabId: 'commingSoon',
+    chapter: '',
+    fontSize: 40,
+    url: '',
   },
 ];
 
